@@ -49,10 +49,6 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: pnpm semantic-release
 
-      # Update npm
-      # - name: Update npm
-      #   run: npm install -g npm@10.9.3
-
       - name: Publish
         run: pnpm publish --access public --provenance
         env:
