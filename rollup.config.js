@@ -39,6 +39,7 @@ const config = {
       tsconfig: "./tsconfig.build.json",
       declaration: true,
       declarationDir: "dist/types",
+      outputToFilesystem: true,
       exclude: [
         "**/*.test.ts",
         "**/*.test.tsx",
