@@ -3,6 +3,9 @@
  * A modular, production-ready chess board system for Next.js and React
  */
 
+// Import styles
+import "./app/globals.css";
+
 // Export all components
 export * from "./components/chess";
 

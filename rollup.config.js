@@ -49,6 +49,7 @@ const config = {
         "node_modules/**",
       ],
     }),
+    // postcss is kept for potential CSS imports in components
     postcss({
       config: {
         path: "./postcss.config.mjs",
