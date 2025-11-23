@@ -1,0 +1,75 @@
+import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
+import copy from "rollup-plugin-copy";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import postcss from "rollup-plugin-postcss";
+
+/** @type {import('rollup').RollupOptions} */
+const config = {
+  input: "src/index.ts",
+  output: [
+    {
+      file: "dist/index.js",
+      format: "cjs",
+      sourcemap: true,
+      exports: "named",
+    },
+    {
+      file: "dist/index.esm.js",
+      format: "esm",
+      sourcemap: true,
+      exports: "named",
+    },
+  ],
+  plugins: [
+    peerDepsExternal(),
+    resolve({
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
+    }),
+    commonjs(),
+    typescript({
+      tsconfig: "./tsconfig.build.json",
+      declaration: true,
+      declarationDir: "dist/types",
+      exclude: [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.stories.ts",
+        "**/*.stories.tsx",
+        "src/app/**/*",
+        "node_modules/**",
+      ],
+    }),
+    postcss({
+      config: {
+        path: "./postcss.config.mjs",
+      },
+      extensions: [".css"],
+      minimize: true,
+      inject: {
+        insertAt: "top",
+      },
+    }),
+    json(),
+    copy({
+      targets: [
+        { src: "public/pieces", dest: "dist" },
+        { src: "public/audio", dest: "dist" },
+      ],
+    }),
+  ],
+  external: [
+    "react",
+    "react-dom",
+    "next",
+    "motion/react",
+    "chess.js",
+    "lucide-react",
+    "sonner",
+    "next-themes",
+  ],
+};
+
+export default config;

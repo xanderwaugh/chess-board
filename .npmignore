@@ -1,6 +1,52 @@
-src
-rollup.config.js
+# Source files
+src/app/
+
+# Development files
+.next/
+node_modules/
+.cursor/
+.vscode/
+.idea/
+
+# Config files
+.eslintrc*
+.prettierrc*
 tsconfig.json
+tsconfig.build.json
+next.config.*
+tailwind.config.*
+postcss.config.*
+prettier.config.*
+eslint.config.*
+components.json
+
+# Documentation (keep only essential)
+CONTRIBUTING.md
+ARCHITECTURE.md
+QUICK_START.md
+PROJECT_SUMMARY.md
+
+# Git
+.git/
 .gitignore
-.github
-docs
+.gitattributes
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Testing
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+coverage/
+
+# Misc
+*.log
+.env*
+.DS_Store
+*.local
+
+.rollup.cache

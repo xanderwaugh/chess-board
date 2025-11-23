@@ -62,16 +62,26 @@ A production-ready, fully modular chess board application built with **Next.js 1
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
-- Node.js 20+ or 22+
-- pnpm (recommended) or npm
-
 ### Installation
+
+#### As an npm Package
+
+```bash
+# Using pnpm
+pnpm add @xanderwaugh/chess-board chess.js motion lucide-react sonner
+
+# Using npm
+npm install @xanderwaugh/chess-board chess.js motion lucide-react sonner
+
+# Using yarn
+yarn add @xanderwaugh/chess-board chess.js motion lucide-react sonner
+```
+
+#### Development Setup (Cloning Repository)
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/xanderwaugh/chess-board.git
 cd chess-board
 
 # Install dependencies
@@ -81,12 +91,18 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open [http://localhost:3000](http://localhost:3000) to view the demo application.
 
-### Build for Production
+### Building the Library
+
+To build the library for npm publishing:
 
 ```bash
+# Build library (creates dist/ folder)
 pnpm build
+
+# Or build Next.js demo app
+pnpm build:next
 pnpm start
 ```
 
