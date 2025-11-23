@@ -11,6 +11,7 @@ interface PieceProps {
   piece: ChessPiece;
   dragging?: boolean;
   animate?: boolean;
+  size?: number;
 }
 
 /**
@@ -20,23 +21,25 @@ const Piece: React.FC<PieceProps> = ({
   piece,
   dragging = false,
   animate = true,
+  size = 60,
 }) => {
   const imagePath = getPieceImagePath(piece);
 
   if (!animate) {
     return (
-      <Image
-        src={imagePath}
-        alt={`${piece.color === "w" ? "White" : "Black"} ${piece.type}`}
-        width={60}
-        height={60}
-        className={cn(
-          "pointer-events-none object-contain select-none",
-          dragging && "opacity-50",
-        )}
-        draggable={false}
-        priority={true}
-      />
+      <div className="relative" style={{ width: size, height: size }}>
+        <Image
+          src={imagePath}
+          alt={`${piece.color === "w" ? "White" : "Black"} ${piece.type}`}
+          fill={true}
+          className={cn(
+            "pointer-events-none object-contain select-none",
+            dragging && "opacity-50",
+          )}
+          draggable={false}
+          priority={true}
+        />
+      </div>
     );
   }
 
@@ -53,15 +56,17 @@ const Piece: React.FC<PieceProps> = ({
         stiffness: 300,
         damping: 25,
       }}
+      style={{
+        minWidth: size,
+        minHeight: size,
+      }}
       className="relative size-full"
     >
       <Image
         src={imagePath}
         alt={`${piece.color === "w" ? "White" : "Black"} ${piece.type}`}
         fill={true}
-        // width={64}
-        // height={64}
-        className="pointer-events-none size-full object-contain select-none"
+        className="pointer-events-none object-contain select-none"
         draggable={false}
         priority={true}
       />
