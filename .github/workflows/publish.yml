@@ -18,16 +18,35 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4 # Checkout your repository code
+
+        # Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
+          version: 10 # Optional: specify a pnpm version, e.g., '8', 'latest', or a specific version like '8.6.0'
+
+      # Setup Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Or your preferred Node.js version
+          cache: "pnpm" # Enable pnpm caching for faster dependency installation
 
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
         run: npm install -g npm@latest
-      - run: npm ci
-      - run: npm run build
-      - run: npm audit signatures
-      - run: npm publish
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Audit signatures
+        run: pnpm audit signatures
+
+      - name: Publish
+        run: pnpm publish --access public
+        # env:
+        #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
