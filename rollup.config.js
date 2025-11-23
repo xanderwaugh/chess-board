@@ -23,6 +23,12 @@ const config = {
       exports: "named",
     },
   ],
+  onwarn: (warning, warn) => {
+    if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+      return; // Ignore this specific warning
+    }
+    warn(warning);
+  },
   plugins: [
     peerDepsExternal(),
     resolve({
