@@ -1,63 +1,114 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Crown } from "lucide-react";
+
+import { Button } from "~/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-zinc-50 via-zinc-100 to-zinc-200 font-sans dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800">
+      <main className="flex w-full max-w-4xl flex-col items-center justify-center gap-12 px-8 py-24">
+        {/* Hero section */}
+        <div className="flex flex-col items-center gap-6 text-center">
+          <div className="bg-primary/10 ring-primary/20 rounded-full p-6 shadow-xl ring-1">
+            <Crown className="text-primary h-16 w-16" />
+          </div>
+          <h1 className="max-w-2xl text-5xl leading-tight font-bold tracking-tight text-black md:text-6xl dark:text-zinc-50">
+            Modular Chess Board System
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="max-w-xl text-xl leading-8 text-zinc-600 dark:text-zinc-400">
+            A production-ready, fully modular chess board built with Next.js 16,
+            React, Framer Motion, and chess.js. Complete with animations,
+            themes, timers, and PGN/FEN support.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* CTA */}
+        <Link href="/chess">
+          <Button size="lg" className="group h-14 gap-3 px-8 text-lg">
+            Launch Chess Board
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </Link>
+
+        {/* Features grid */}
+        <div className="mt-8 grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">♟️</div>
+            <h3 className="mb-2 font-semibold">Fully Interactive</h3>
+            <p className="text-muted-foreground text-sm">
+              Drag & drop or click-to-move with real-time move validation using
+              chess.js
+            </p>
+          </div>
+
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">🎨</div>
+            <h3 className="mb-2 font-semibold">Beautiful Themes</h3>
+            <p className="text-muted-foreground text-sm">
+              Choose from 4 stunning board themes: Default, Wood, Marble, and
+              Neon
+            </p>
+          </div>
+
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">✨</div>
+            <h3 className="mb-2 font-semibold">Smooth Animations</h3>
+            <p className="text-muted-foreground text-sm">
+              Powered by Framer Motion for fluid piece movements and transitions
+            </p>
+          </div>
+
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">⏱️</div>
+            <h3 className="mb-2 font-semibold">Chess Clocks</h3>
+            <p className="text-muted-foreground text-sm">
+              Built-in timers with customizable time controls and pause/resume
+            </p>
+          </div>
+
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">💾</div>
+            <h3 className="mb-2 font-semibold">Import/Export</h3>
+            <p className="text-muted-foreground text-sm">
+              Full FEN and PGN support for loading and saving games
+            </p>
+          </div>
+
+          <div className="border-border bg-background rounded-xl border p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div className="mb-3 text-3xl">🧩</div>
+            <h3 className="mb-2 font-semibold">Modular Design</h3>
+            <p className="text-muted-foreground text-sm">
+              Publishable as npm package with clean, typed, and reusable
+              components
+            </p>
+          </div>
+        </div>
+
+        {/* Tech stack */}
+        <div className="border-border bg-muted/50 mt-8 w-full rounded-xl border p-6 text-center backdrop-blur-sm">
+          <p className="text-muted-foreground mb-3 text-sm font-medium">
+            Built with modern technologies
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              Next.js 16
+            </span>
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              React 19
+            </span>
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              Framer Motion
+            </span>
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              chess.js
+            </span>
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              Tailwind v4
+            </span>
+            <span className="bg-background rounded-full px-4 py-2 shadow-sm">
+              shadcn/ui
+            </span>
+          </div>
         </div>
       </main>
     </div>
