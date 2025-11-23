@@ -1,5 +1,5 @@
 {
-  "name": "@xanderwaugh/chess-board",
+  "name": "chess-board",
   "version": "1.0.0",
   "description": "A modular, production-ready chess board system for Next.js v16 with React 19, Framer Motion, and chess.js",
   "keywords": [
