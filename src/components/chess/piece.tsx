@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 
 import type { ChessPiece } from "~/utils/chess-helpers";
+import { cn } from "~/lib/utils";
 import { getPieceImagePath } from "~/utils/chess-helpers";
 
 interface PieceProps {
@@ -29,11 +30,12 @@ const Piece: React.FC<PieceProps> = ({
         alt={`${piece.color === "w" ? "White" : "Black"} ${piece.type}`}
         width={60}
         height={60}
-        className={`pointer-events-none select-none ${
-          dragging ? "opacity-50" : ""
-        }`}
+        className={cn(
+          "pointer-events-none object-contain select-none",
+          dragging && "opacity-50",
+        )}
         draggable={false}
-        priority
+        priority={true}
       />
     );
   }
@@ -51,15 +53,17 @@ const Piece: React.FC<PieceProps> = ({
         stiffness: 300,
         damping: 25,
       }}
-      className="relative h-full w-full"
+      className="relative size-full"
     >
       <Image
         src={imagePath}
         alt={`${piece.color === "w" ? "White" : "Black"} ${piece.type}`}
-        fill
-        className="pointer-events-none object-contain select-none"
+        fill={true}
+        // width={64}
+        // height={64}
+        className="pointer-events-none size-full object-contain select-none"
         draggable={false}
-        priority
+        priority={true}
       />
     </motion.div>
   );
