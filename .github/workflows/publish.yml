@@ -50,11 +50,11 @@ jobs:
       #   run: pnpm semantic-release
 
       # Update npm
-      - name: Update npm
-        run: npm install -g npm@10.9.3
+      # - name: Update npm
+      #   run: npm install -g npm@10.9.3
 
       - name: Publish
-        run: npm publish --access public --provenance
+        run: pnpm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
