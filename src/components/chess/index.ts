@@ -3,6 +3,9 @@
  * Use this for clean imports when using the chess board system as a package
  */
 
+import "~/app/globals.css";
+import "~/styles/chess-board.css";
+
 export { Board } from "./board";
 export type { BoardProps } from "./board";
 
