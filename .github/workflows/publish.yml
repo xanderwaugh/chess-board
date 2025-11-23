@@ -43,10 +43,10 @@ jobs:
       - name: Audit signatures
         run: pnpm audit signatures
 
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm semantic-release
+      # - name: Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: pnpm semantic-release
 
-      # - name: Publish
-      #   run: pnpm publish
+      - name: Publish
+        run: pnpm publish
