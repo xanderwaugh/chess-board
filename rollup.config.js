@@ -2,6 +2,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import postcssImport from "postcss-import";
+import { cleandir } from "rollup-plugin-cleandir";
 import copy from "rollup-plugin-copy";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
@@ -30,6 +32,7 @@ const config = {
     warn(warning);
   },
   plugins: [
+    cleandir("dist"),
     peerDepsExternal(),
     resolve({
       extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -51,14 +54,14 @@ const config = {
     }),
     // postcss is kept for potential CSS imports in components
     postcss({
+      plugins: [postcssImport()],
       config: {
         path: "./postcss.config.mjs",
       },
       extensions: [".css"],
       minimize: true,
-      inject: {
-        insertAt: "top",
-      },
+      extract: true,
+      inject: { insertAt: "top" },
     }),
     json(),
     copy({
