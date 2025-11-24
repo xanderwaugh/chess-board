@@ -3,14 +3,13 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: ["src/index.ts"],
   format: ["esm", "cjs"],
-  dts: {
-    resolve: true,
-  },
+  dts: { resolve: true },
   splitting: true,
   sourcemap: true,
+  cjsInterop: true,
   clean: true,
   minify: false,
-  cjsInterop: true,
+  publicDir: "public",
   outDir: "dist",
   external: [
     "react",
