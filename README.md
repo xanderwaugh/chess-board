@@ -106,6 +106,52 @@ pnpm build:next
 pnpm start
 ```
 
+### 🎨 Setting Up Styles (IMPORTANT)
+
+**This library uses Tailwind CSS v4 and requires proper configuration in your consuming project.**
+
+⚠️ **Components will not be styled correctly without proper setup!**
+
+#### Quick Setup:
+
+1. **Add the library to your Tailwind content array** (`tailwind.config.ts`):
+
+```typescript
+export default {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@xanderwaugh/chess-board/dist/**/*.{js,mjs}", // Add this!
+  ],
+};
+```
+
+2. **Import the theme CSS** in your root CSS file (`app/globals.css`):
+
+```css
+@import "tailwindcss";
+@import "@xanderwaugh/chess-board/styles";
+```
+
+3. **Setup theme provider** (`app/layout.tsx`):
+
+```tsx
+import { ThemeProvider } from "next-themes";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+📖 **For detailed styling setup and troubleshooting, see [STYLING_GUIDE.md](./STYLING_GUIDE.md)**
+
 ## 📁 Project Structure
 
 ```
