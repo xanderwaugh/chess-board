@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * Sound types for chess events
@@ -10,6 +10,13 @@ export type ChessSoundType = "move" | "capture" | "notify" | "gameEnd";
 interface UseSoundOptions {
   enabled?: boolean;
   volume?: number;
+  /**
+   * Custom sound file paths or URLs to override default sounds.
+   * You can provide paths for any or all sound types.
+   * @example { gameEnd: "/custom/game-end.mp3" }
+   * @example { move: "https://example.com/move.mp3", capture: "/custom/capture.mp3" }
+   */
+  sounds?: Partial<Record<ChessSoundType, string>>;
 }
 
 interface UseSoundReturn {
@@ -35,11 +42,17 @@ export function useSound(options: UseSoundOptions = {}): UseSoundReturn {
   const [volume, setVolume] = useState(options.volume ?? 0.5);
   const audioRefs = useRef<Map<ChessSoundType, HTMLAudioElement>>(new Map());
 
+  // Merge custom sounds with defaults
+  const soundPaths = useMemo(
+    () => ({ ...SOUND_PATHS, ...options.sounds }),
+    [options.sounds],
+  );
+
   // Initialize audio elements
   useEffect(() => {
     const map = new Map<ChessSoundType, HTMLAudioElement>();
 
-    Object.entries(SOUND_PATHS).forEach(([type, path]) => {
+    Object.entries(soundPaths).forEach(([type, path]) => {
       const audio = new Audio(path);
       audio.volume = volume;
       audio.preload = "auto";
@@ -56,7 +69,7 @@ export function useSound(options: UseSoundOptions = {}): UseSoundReturn {
       });
       map.clear();
     };
-  }, [volume]);
+  }, [volume, soundPaths]);
 
   // Update volume for all audio elements when volume changes
   useEffect(() => {

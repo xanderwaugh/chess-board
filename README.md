@@ -128,13 +128,15 @@ export default {
     or add to your layout.tsx:
 
 ```typescript
-import "@xanderwaugh/chess-board/theme.css";
+// import "@xanderwaugh/chess-board/theme.css";
 ```
 
 2. **Import the theme CSS** in your root CSS file (`app/globals.css`):
 
 ```css
-@import "@xanderwaugh/chess-board/theme.css";
+/* @import "@xanderwaugh/chess-board/theme.css"; 
+*/
+@source "../../node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
 
 3. **Setup theme provider** (`app/layout.tsx`):
