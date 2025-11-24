@@ -1,6 +1,6 @@
 {
   "name": "@xanderwaugh/chess-board",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A modular, production-ready chess board system for Next.js v16 with React 19, Framer Motion, and chess.js",
   "keywords": [
     "chess",
@@ -33,8 +33,7 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
-    "./theme.css": "./dist/theme.css",
-    "./styles": "./src/styles/styles.css"
+    "./theme.css": "./dist/theme.css"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -50,7 +49,8 @@
     "QUICK_STYLING_SETUP.md"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && pnpm build:css",
+    "build:css": "pnpx @tailwindcss/cli@latest -i ./src/styles/globals.css -o ./dist/theme.css --minify",
     "build:next": "next build",
     "dev": "next dev",
     "format": "prettier --write .",

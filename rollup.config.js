@@ -57,6 +57,7 @@ const config = [
         config: {
           path: "./postcss.config.mjs",
         },
+        plugins: [],
         extensions: [".css"],
         minimize: true,
         extract: true,
@@ -80,17 +81,6 @@ const config = [
       "lucide-react",
       "sonner",
       "next-themes",
-    ],
-  },
-  {
-    // add the `main.css` file input
-    input: "./src/styles/styles.css",
-    output: [{ file: "dist/theme.css", format: "es" }],
-    plugins: [
-      postcss({
-        extract: true,
-        minimize: true,
-      }),
     ],
   },
 ];

@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "outDir": "dist",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
