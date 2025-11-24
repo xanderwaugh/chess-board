@@ -39,17 +39,16 @@ my-monorepo/
 #### 2. Root Configuration
 
 **Root `package.json`:**
+
 ```json
 {
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "workspaces": ["apps/*", "packages/*"]
 }
 ```
 
 **Root `turbo.json`:**
+
 ```json
 {
   "$schema": "https://turbo.build/schema.json",
@@ -69,6 +68,7 @@ my-monorepo/
 #### 3. Consumer App Configuration
 
 **App `package.json`:**
+
 ```json
 {
   "name": "my-chess-app",
@@ -87,6 +87,7 @@ my-monorepo/
 ```
 
 **App `tsconfig.json` (with project references):**
+
 ```json
 {
   "extends": "../../tsconfig.json",
@@ -110,19 +111,25 @@ my-monorepo/
 ## Type Safety Features
 
 ### 1. Declaration Maps
+
 The library now generates `.d.ts.map` files that allow your IDE to:
+
 - Jump to the actual source code (not just `.d.ts` files)
 - Show better error messages with source locations
 - Enable better refactoring across the monorepo
 
 ### 2. Composite Projects
+
 With `composite: true` in `tsconfig.build.json`:
+
 - Faster incremental builds in the monorepo
 - Better type-checking performance
 - Proper project references support
 
 ### 3. Explicit Package Exports
+
 The `package.json` now has explicit type exports for each condition:
+
 ```json
 {
   "exports": {
@@ -152,7 +159,7 @@ import '@xanderwaugh/chess-board/theme.css';
 
 export default function ChessPage() {
   const game = useChessGame();
-  
+
   return (
     <div className="p-4">
       <ChessBoard
@@ -168,11 +175,13 @@ export default function ChessPage() {
 ## Build Commands
 
 ### For the Library (from library root):
+
 ```bash
 pnpm build          # Builds JS + CSS + types
 ```
 
 ### For the Monorepo (from root):
+
 ```bash
 turbo build         # Builds all packages in dependency order
 turbo dev           # Runs all dev servers
@@ -181,22 +190,26 @@ turbo dev           # Runs all dev servers
 ## Troubleshooting
 
 ### TypeScript can't find types
+
 1. Make sure the library is built: `cd packages/chess-board && pnpm build`
 2. Check that `node_modules` is properly linked: `pnpm install`
 3. Restart your TypeScript server in VSCode: `Cmd+Shift+P` → "TypeScript: Restart TS Server"
 
 ### Declaration map errors
+
 - Ensure you're using TypeScript 4.7+ for proper declaration map support
 - Check that `declarationMap: true` is in both `tsconfig.build.json` and rollup config
 
 ### Module resolution issues
+
 If using Next.js 15+, ensure your `next.config.ts` transpiles the package:
+
 ```typescript
 // apps/my-chess-app/next.config.ts
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
-  transpilePackages: ['@xanderwaugh/chess-board'],
+  transpilePackages: ["@xanderwaugh/chess-board"],
 };
 
 export default config;
@@ -216,10 +229,11 @@ export default config;
 For version management across the monorepo, you can use pnpm's catalog feature:
 
 **Root `pnpm-workspace.yaml`:**
+
 ```yaml
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - "apps/*"
+  - "packages/*"
 
 catalog:
   react: ^19.0.0
@@ -231,6 +245,7 @@ catalog:
 ```
 
 Then reference versions with `catalog:`:
+
 ```json
 {
   "dependencies": {
@@ -239,4 +254,3 @@ Then reference versions with `catalog:`:
   }
 }
 ```
-
