@@ -54,7 +54,7 @@ const config = {
     }),
     // postcss is kept for potential CSS imports in components
     postcss({
-      plugins: [postcssImport()],
+      // plugins: [postcssImport()],
       config: {
         path: "./postcss.config.mjs",
       },
@@ -68,6 +68,7 @@ const config = {
       targets: [
         { src: "public/pieces", dest: "dist" },
         { src: "public/audio", dest: "dist" },
+        { src: "src/app/globals.css", dest: "dist" },
       ],
     }),
   ],
