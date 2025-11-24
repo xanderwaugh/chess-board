@@ -38,27 +38,15 @@ pnpm add next next-themes
 
 ## Setup in Next.js 15+
 
-### 1. Configure Tailwind CSS
+### 1. Configure Styles
 
-Update `tailwind.config.ts`:
+Add the library source to your root CSS file (e.g., `app/globals.css`):
 
-```ts
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    // Add this line to scan the chess-board package
-    "./node_modules/@xanderwaugh/chess-board/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-
-export default config;
+```css
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
+
+**Note:** You don't need to configure `tailwind.config.ts` or import styles in your `layout.tsx` file. Just add the `@source` line above to your CSS file.
 
 ### 2. Add Theme Provider (Optional)
 
@@ -128,6 +116,7 @@ export default function ChessPage() {
 ```tsx
 "use client";
 
+import type { BoardTheme } from "@xanderwaugh/chess-board";
 import { useState } from "react";
 import {
   Board,
@@ -135,7 +124,6 @@ import {
   useChessGame,
   useSound,
 } from "@xanderwaugh/chess-board";
-import type { BoardTheme } from "@xanderwaugh/chess-board";
 
 export default function ChessPage() {
   const [theme, setTheme] = useState<BoardTheme>("wood");
@@ -167,17 +155,17 @@ export default function ChessPage() {
 ```tsx
 "use client";
 
+import type { BoardTheme } from "@xanderwaugh/chess-board";
 import { useState } from "react";
 import {
   Board,
   Controls,
+  GameEndModal,
   MoveHistory,
   Timers,
-  GameEndModal,
   useChessGame,
   useSound,
 } from "@xanderwaugh/chess-board";
-import type { BoardTheme } from "@xanderwaugh/chess-board";
 
 export default function FullChessGame() {
   const [theme, setTheme] = useState<BoardTheme>("wood");
@@ -273,29 +261,15 @@ pnpm add @xanderwaugh/chess-board chess.js motion lucide-react sonner
 pnpm add -D tailwindcss postcss autoprefixer
 ```
 
-### 2. Configure Tailwind
+### 2. Configure Styles
 
-```js
-// tailwind.config.js
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@xanderwaugh/chess-board/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
+Add the library source to your root CSS file:
+
+```css
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
 
-### 3. Import Styles
-
-```tsx
-// src/main.tsx or App.tsx
-import "tailwindcss/tailwind.css";
-```
+**Note:** You don't need to configure `tailwind.config.js` or import styles in your component files. Just add the `@source` line above to your CSS file.
 
 ### 4. Use Components
 
@@ -341,7 +315,7 @@ const game = useChessGame({
 ### Load Position from FEN
 
 ```tsx
-import { useChessGame, FAMOUS_POSITIONS } from "@xanderwaugh/chess-board";
+import { FAMOUS_POSITIONS, useChessGame } from "@xanderwaugh/chess-board";
 
 function PuzzlePage() {
   const game = useChessGame();
@@ -441,7 +415,7 @@ export async function saveGame(pgn: string, userId: string) {
 }
 
 // In component
-"use client";
+("use client");
 
 const game = useChessGame({
   onGameOver: async () => {
@@ -458,12 +432,12 @@ The package is fully typed. Import types as needed:
 
 ```tsx
 import type {
-  UseChessGameReturn,
   BoardTheme,
-  ChessPiece,
   ChessColor,
+  ChessPiece,
   MoveResult,
   PGNMetadata,
+  UseChessGameReturn,
 } from "@xanderwaugh/chess-board";
 
 const MyComponent = () => {
@@ -529,13 +503,13 @@ pnpm add chess.js motion lucide-react sonner react react-dom
 
 ### Styles Not Applied
 
-Ensure Tailwind is configured to scan the package:
+Ensure you added the `@source` line to your CSS file:
 
-```js
-content: [
-  "./node_modules/@xanderwaugh/chess-board/**/*.{js,ts,jsx,tsx}",
-]
+```css
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
+
+You don't need to configure `tailwind.config.js` - the `@source` directive is sufficient.
 
 ### TypeScript Errors
 
@@ -562,4 +536,3 @@ cp -r node_modules/@xanderwaugh/chess-board/dist/audio public/
 ---
 
 Happy coding! ♟️🎉
-

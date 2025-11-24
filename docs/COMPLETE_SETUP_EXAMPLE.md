@@ -38,44 +38,15 @@ pnpm add @xanderwaugh/chess-board chess.js motion lucide-react sonner next-theme
 # npm install @xanderwaugh/chess-board chess.js motion lucide-react sonner next-themes
 ```
 
-### 3. Configure Tailwind CSS
-
-Edit `tailwind.config.ts` in your project root:
-
-```typescript
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  // Add dark mode support
-  darkMode: ["class"],
-
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    // 👇 CRITICAL: Add this line to scan chess-board components
-    "./node_modules/@xanderwaugh/chess-board/dist/**/*.{js,mjs}",
-  ],
-
-  theme: {
-    extend: {},
-  },
-
-  plugins: [],
-};
-
-export default config;
-```
-
-### 4. Import Styles
+### 3. Configure Styles
 
 Edit `src/app/globals.css`:
 
 ```css
 @import "tailwindcss";
 
-/* Import chess-board theme variables and styles */
-@import "@xanderwaugh/chess-board/styles";
+/* Add chess-board source for Tailwind CSS v4 */
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 
 @layer base {
   * {
@@ -88,7 +59,9 @@ Edit `src/app/globals.css`:
 }
 ```
 
-### 5. Setup Theme Provider
+**Note:** You don't need to configure `tailwind.config.ts` or import styles in your `layout.tsx` file. Just add the `@source` line above to your CSS file.
+
+### 4. Setup Theme Provider
 
 Edit `src/app/layout.tsx`:
 
@@ -125,7 +98,7 @@ export default function RootLayout({
 }
 ```
 
-### 6. Create a Chess Page
+### 5. Create a Chess Page
 
 Create `src/app/chess/page.tsx`:
 
@@ -234,7 +207,7 @@ export default function ChessPage() {
 }
 ```
 
-### 7. Update Home Page (Optional)
+### 6. Update Home Page (Optional)
 
 Edit `src/app/page.tsx`:
 
@@ -261,7 +234,7 @@ export default function Home() {
 }
 ```
 
-### 8. Run Your Application
+### 7. Run Your Application
 
 ```bash
 pnpm dev
@@ -284,25 +257,16 @@ Visit [http://localhost:3000/chess](http://localhost:3000/chess) to see your che
 
 ### Issue: Components are unstyled (no colors, no spacing)
 
-**Solution**: Ensure you added the library to your Tailwind `content` array:
+**Solution**: Make sure you added the `@source` line to your CSS file:
 
-```typescript
-// tailwind.config.ts
-content: ["./node_modules/@xanderwaugh/chess-board/dist/**/*.{js,mjs}"];
+```css
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
 
 Then restart your dev server:
 
 ```bash
 pnpm dev
-```
-
-### Issue: CSS variables are undefined
-
-**Solution**: Make sure you imported the styles in `globals.css`:
-
-```css
-@import "@xanderwaugh/chess-board/styles";
 ```
 
 ### Issue: Dark mode doesn't work
@@ -336,6 +300,8 @@ export default {
 };
 ```
 
+**Note:** You don't need to add the library to your `tailwind.config.ts` content array. The `@source` directive in your CSS file is sufficient.
+
 ## Advanced Configuration
 
 ### Custom Theme Colors
@@ -343,7 +309,7 @@ export default {
 Override CSS variables in your `globals.css`:
 
 ```css
-@import "@xanderwaugh/chess-board/styles";
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 
 :root {
   /* Override default colors */

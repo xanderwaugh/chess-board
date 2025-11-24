@@ -114,48 +114,13 @@ pnpm start
 
 #### Quick Setup:
 
-1. **Add the library to your Tailwind content array** (`tailwind.config.ts`):
-
-```typescript
-export default {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@xanderwaugh/chess-board/dist/**/*.{js,mjs}", // Add this!
-  ],
-};
-```
-
-    or add to your layout.tsx:
-
-```typescript
-// import "@xanderwaugh/chess-board/theme.css";
-```
-
-2. **Import the theme CSS** in your root CSS file (`app/globals.css`):
+**Add the library source to your root CSS file** (e.g., `app/globals.css` or `styles.css`):
 
 ```css
-/* @import "@xanderwaugh/chess-board/theme.css"; 
-*/
-@source "../../node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
+@source "node_modules/@xanderwaugh/chess-board/dist/*.{js,ts,jsx,tsx}";
 ```
 
-3. **Setup theme provider** (`app/layout.tsx`):
-
-```tsx
-import { ThemeProvider } from "next-themes";
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
-```
+That's it! You don't need to configure `tailwind.config.ts` or import styles in your `layout.tsx` file.
 
 📖 **For detailed styling setup and troubleshooting, see [STYLING_GUIDE.md](./STYLING_GUIDE.md)**
 
