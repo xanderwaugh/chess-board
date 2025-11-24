@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@import "./styles.css";
+
+@layer base {
+  * {
+    @apply outline-ring/50 box-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
