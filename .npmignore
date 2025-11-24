@@ -1,4 +1,5 @@
-# Source files
+# Source files - Note: src/ is included in package for consumers to scan
+# Only exclude Next.js app-specific files
 src/app/
 
 # Development files
