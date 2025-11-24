@@ -1,6 +1,6 @@
 {
   "name": "@xanderwaugh/chess-board",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "A modular, production-ready chess board system for Next.js v16 with React 19, Framer Motion, and chess.js",
   "keywords": [
     "chess",
@@ -41,6 +41,7 @@
       "default": "./dist/index.esm.js"
     },
     "./theme.css": "./dist/theme.css",
+    "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",

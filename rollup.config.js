@@ -70,7 +70,8 @@ const config = [
         targets: [
           { src: "public/pieces", dest: "dist" },
           { src: "public/audio", dest: "dist" },
-          // { src: "src/styles/styles.css", dest: "dist" },
+          // for using @import
+          { src: "src/styles/globals.css", dest: "dist", rename: "styles.css" },
         ],
       }),
       // terser(),
