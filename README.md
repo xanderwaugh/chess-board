@@ -125,11 +125,16 @@ export default {
 };
 ```
 
+    or add to your layout.tsx:
+
+```typescript
+import "@xanderwaugh/chess-board/theme.css";
+```
+
 2. **Import the theme CSS** in your root CSS file (`app/globals.css`):
 
 ```css
-@import "tailwindcss";
-@import "@xanderwaugh/chess-board/styles";
+@import "@xanderwaugh/chess-board/theme.css";
 ```
 
 3. **Setup theme provider** (`app/layout.tsx`):
