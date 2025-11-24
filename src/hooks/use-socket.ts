@@ -146,7 +146,8 @@ export function useSocket(options: UseSocketOptions = {}): UseSocketReturn {
           reconnectCountRef.current++;
           reconnectTimeoutRef.current = setTimeout(() => {
             console.log(`Reconnecting... Attempt ${reconnectCountRef.current}`);
-            connect();
+            connectRef.current?.();
+            // connect();
           }, reconnectDelay);
         }
       };
@@ -159,7 +160,9 @@ export function useSocket(options: UseSocketOptions = {}): UseSocketReturn {
   }, [url, roomId, playerId, reconnectAttempts, reconnectDelay]);
 
   // Store connect function in ref
-  connectRef.current = connect;
+  useEffect(() => {
+    connectRef.current = connect;
+  }, [connect]);
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {
@@ -220,13 +223,14 @@ export function useSocket(options: UseSocketOptions = {}): UseSocketReturn {
   // Auto-connect on mount if enabled
   useEffect(() => {
     if (autoConnect) {
-      connect();
+      // connect();
+      connectRef.current?.();
     }
 
     return () => {
       disconnect();
     };
-  }, [autoConnect, connect, disconnect]);
+  }, [autoConnect, disconnect]);
 
   return {
     connected,

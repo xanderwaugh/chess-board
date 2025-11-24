@@ -1,6 +1,6 @@
 {
   "name": "@xanderwaugh/chess-board",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "A modular, production-ready chess board system for Next.js v16 with React 19, Framer Motion, and chess.js",
   "keywords": [
     "chess",
@@ -66,6 +66,7 @@
     "prepublishOnly": "pnpm build",
     "semantic-release": "semantic-release",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
     "ui-add": "npx shadcn@latest add"
   },
   "dependencies": {
