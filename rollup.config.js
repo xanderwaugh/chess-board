@@ -42,6 +42,7 @@ const config = [
       typescript({
         tsconfig: "./tsconfig.build.json",
         declaration: true,
+        declarationMap: true,
         declarationDir: "dist/types",
         outputToFilesystem: true,
         exclude: [

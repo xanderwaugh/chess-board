@@ -4,6 +4,7 @@
     "outDir": "./dist",
     "declaration": true,
     "declarationMap": true,
+    "composite": true,
     "emitDeclarationOnly": false,
     "rootDir": "./src",
     "jsx": "react-jsx",
@@ -17,8 +18,9 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "forceConsistentCasingInFilenames": true,
+    "resolveJsonModule": true,
+    "sourceMap": true
   },
   "include": [
     "src/components/**/*",
